@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pulse — a social app for people who make things</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Icons (Lucide, loaded as a script that renders <i data-lucide="..."> tags) -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">PULSE</span>
+    </div>
+
+    <div class="search-box">
+      <i data-lucide="search" size="15"></i>
+      <input id="search-input" type="text" placeholder="Search posts, people, tags" />
+    </div>
+
+    <div class="topbar-right">
+      <select id="user-switcher" title="Switch demo user"></select>
+      <button id="open-my-profile" class="avatar-btn"></button>
+    </div>
+  </header>
+
+  <!-- ============ APP LAYOUT ============ -->
+  <div class="layout">
+
+    <!-- LEFT NAV -->
+    <nav class="sidebar">
+      <button class="nav-item" data-view="feed">
+        <i data-lucide="home"></i> <span>Feed</span>
+      </button>
+      <button class="nav-item" data-view="explore">
+        <i data-lucide="compass"></i> <span>Explore</span>
+      </button>
+      <button class="nav-item" data-view="notifications">
+        <i data-lucide="bell"></i> <span>Notifications</span>
+        <span id="notif-badge" class="pill" hidden>0</span>
+      </button>
+      <button class="nav-item" data-view="profile-me">
+        <i data-lucide="user"></i> <span>Profile</span>
+      </button>
+
+      <button id="open-composer" class="new-post-btn">
+        <i data-lucide="plus"></i> New post
+      </button>
+    </nav>
+
+    <!-- CENTER COLUMN -->
+    <main class="feed-column">
+      <div id="active-tag-bar" class="active-tag-bar" hidden></div>
+      <div id="view-root"><!-- rendered by script.js --></div>
+    </main>
+
+    <!-- RIGHT COLUMN -->
+    <aside class="right-column">
+      <div class="panel">
+        <div class="panel-title"><i data-lucide="trending-up" color="#E2543A"></i> Trending tags</div>
+        <div id="trending-tags" class="tag-cloud"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><i data-lucide="user-plus" color="#2E8B84"></i> Suggested to follow</div>
+        <div id="suggested-users"></div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ============ COMPOSER MODAL (hidden by default) ============ -->
+  <div id="composer-overlay" class="overlay" hidden>
+    <div class="composer">
+      <div class="composer-header">
+        <h2>New post</h2>
+        <button id="close-composer" class="icon-btn"><i data-lucide="x"></i></button>
+      </div>
+
+      <div class="composer-body">
+        <div id="composer-avatar" class="avatar avatar-38"></div>
+        <textarea id="composer-text" rows="4" placeholder="What did you make today?"></textarea>
+      </div>
+
+      <div id="composer-image-preview" class="media-preview" hidden>
+        <img id="composer-image-tag" src="" alt="upload preview" />
+        <button class="remove-media-btn" data-remove="image"><i data-lucide="x" size="14"></i></button>
+      </div>
+      <div id="composer-video-preview" class="media-preview" hidden>
+        <video id="composer-video-tag" controls></video>
+        <button class="remove-media-btn" data-remove="video"><i data-lucide="x" size="14"></i></button>
+      </div>
+
+      <div class="tag-input-row">
+        <i data-lucide="hash" size="16" color="#8C887C"></i>
+        <input id="composer-tags" type="text" placeholder="add tags — ceramics, process, wip" />
+      </div>
+
+      <div class="composer-footer">
+        <div class="composer-media-buttons">
+          <button id="composer-add-image" class="chip-btn"><i data-lucide="image" size="16"></i> Image</button>
+          <button id="composer-add-video" class="chip-btn"><i data-lucide="video" size="16"></i> Video</button>
+          <input id="composer-file-image" type="file" accept="image/*" hidden />
+          <input id="composer-file-video" type="file" accept="video/*" hidden />
+        </div>
+        <button id="composer-submit" class="post-btn">Post <i data-lucide="send" size="14"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
